@@ -3,7 +3,7 @@ import React from "react";
 function Header() {
   return (
     <header>
-      <h1>Keepr App</h1>
+      <h1>Keepr</h1>
     </header>
   );
 }
