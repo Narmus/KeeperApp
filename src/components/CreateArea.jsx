@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function CreateArea() {
+function CreateArea({ onAdd }) {
   const [content, setContent] = useState({
     title: "",
     content: "",
@@ -14,12 +14,20 @@ function CreateArea() {
         [name]: value,
       };
     });
-    console.log(content);
+  }
+
+  function addItem() {
+    onAdd(content);
+    setContent({ title: "", content: "" });
+  }
+
+  function formSubmit(event) {
+    event.preventDefault();
   }
 
   return (
     <div>
-      <form>
+      <form onSubmit={formSubmit}>
         <input
           onChange={changeContent}
           name="title"
@@ -33,7 +41,7 @@ function CreateArea() {
           rows="3"
           value={content.content}
         />
-        <button>Add</button>
+        <button onClick={addItem}>Add</button>
       </form>
     </div>
   );

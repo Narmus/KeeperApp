@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
@@ -6,21 +6,44 @@ import CreateArea from "./CreateArea";
 import notes from "../notes";
 
 function App() {
+  const [lists, setLists] = useState([]);
+
+  function addNote(note) {
+    setLists((prevValue) => {
+      return [...prevValue, note];
+    });
+  }
+
+  function deletNote(id) {
+    console.log("triggered " + id);
+    setLists((prevValue) => {
+      return prevValue.filter((item, index) => {
+        return index !== id;
+      });
+    });
+  }
+
   return (
-    <div>
+    <Fragment>
       <Header />
 
-      <CreateArea />
+      <CreateArea onAdd={addNote} />
 
       {/*Created a map function to gather all notes from notes.js array file*/}
-      {notes.map((note, index) => {
+      {lists.map((note, index) => {
         return (
-          <Note key={note.key} title={note.title} content={note.content} />
+          <Note
+            key={index}
+            id={index}
+            title={note.title}
+            content={note.content}
+            onDelete={deletNote}
+          />
         );
       })}
 
       <Footer />
-    </div>
+    </Fragment>
   );
 }
 
