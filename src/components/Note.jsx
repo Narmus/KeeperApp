@@ -10,7 +10,7 @@ function Note(props) {
       <h1>{props.title}</h1>
       <p>{props.content}</p>
       <div>
-        <button onClick={onClicked}>X</button>
+        <button onClick={onClicked}>x</button>
       </div>
     </div>
   );
