@@ -1,6 +1,6 @@
 {
   "homepage": "https://Narmus.github.io/KeeperApp",
-  "name": "keeper-part-3-starting",
+  "name": "keeper-app",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
@@ -11,6 +11,7 @@
     "react-scripts": "3.2.0"
   },
   "devDependencies": {
+    "gh-pages": "^4.0.0",
     "typescript": "3.3.3"
   },
   "scripts": {
