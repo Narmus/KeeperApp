@@ -3,8 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
-import { getNotes } from "../utils/api";
-import { postNotes } from "../utils/api";
+import { getNotes, postNotes, deleteNotes } from "../utils/api";
 
 function App() {
   // localStorage.length < 1 && localStorage.setItem("Notes", JSON.stringify([]));
@@ -38,13 +37,14 @@ function App() {
     postNotes(note.title, note.content);
   }
 
-  function deletNote(id) {
+  function deletNote(ident, uniqueID) {
     // console.log("triggered " + id);
     setLists((prevValue) => {
       return prevValue.filter((item, index) => {
-        return index !== id;
+        return index !== ident;
       });
     });
+    deleteNotes(uniqueID);
   }
 
   return (
@@ -57,8 +57,9 @@ function App() {
       {lists.map((note, index) => {
         return (
           <Note
+            uniqueID={note._id}
             key={index}
-            id={index}
+            ident={index}
             title={note.title}
             content={note.content}
             onDelete={deletNote}

@@ -19,9 +19,17 @@ export const getNotes = async () => {
 ///Sending Notes to Backend
 
 export const postNotes = async (title, content) => {
-  const notesSender = await Axios.post(basepath + "/notespost", {
+  const notesSender = await Axios.post(basepath + "/notesdelete", {
     title: title,
     content: content,
   });
   return notesSender();
+};
+
+///Deleting Notes from Database
+
+export const deleteNotes = async (noteID) => {
+  const deleteNotes = await Axios.delete(basepath + "/notesdelete/" + noteID)
+    .then((res) => console.log("Delete Note", res))
+    .catch((err) => console.log("Delete catch error", err));
 };

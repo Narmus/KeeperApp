@@ -1,14 +1,14 @@
 import React from "react";
 
-function Note(props) {
+function Note({ title, content, uniqueID, onDelete, ident }) {
   function onClicked() {
-    props.onDelete(props.id);
+    onDelete(ident, uniqueID);
   }
 
   return (
-    <div className="note">
-      <h1>{props.title}</h1>
-      <p>{props.content}</p>
+    <div id={uniqueID} className="note">
+      <h1>{title}</h1>
+      <p>{content}</p>
       <div>
         <button onClick={onClicked}>x</button>
       </div>
