@@ -16,14 +16,19 @@ function CreateArea({ onAdd }) {
     });
   }
 
-  function addItem() {
-    onAdd(content);
-    setContent({ title: "", content: "" });
-  }
+  // function addItem() {
+  //   onAdd(content);
+  //   setContent({ title: "", content: "" });
+  // }
 
   function formSubmit(event) {
     event.preventDefault();
   }
+
+  const addItem = () => {
+    onAdd(content);
+    setContent({ title: "", content: "" });
+  };
 
   return (
     <div>

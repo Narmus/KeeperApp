@@ -3,23 +3,39 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
-// import notes from "../notes";
+import { getNotes } from "../utils/api";
+import { postNotes } from "../utils/api";
 
 function App() {
-  localStorage.length < 1 && localStorage.setItem("Notes", JSON.stringify([]));
+  // localStorage.length < 1 && localStorage.setItem("Notes", JSON.stringify([]));
 
-  let localArray = JSON.parse(localStorage.getItem("Notes"));
-  const [lists, setLists] = useState(localArray);
+  // let localArray = JSON.parse(localStorage.getItem("Notes"));
+  const [lists, setLists] = useState([]);
+
+  // useEffect(() => {
+  //   localStorage.setItem("Notes", JSON.stringify(lists));
+  // }, [lists]);
+
+  // const setNotes = async () => {
+  //   const notesObject = await getNotes();
+  //   console.log("setnotes", notesObject);
+  //   setLists(notesObject.notes);
+  // };
+
+  const setNotes = async () => {
+    const notesObject = await getNotes();
+    setLists(notesObject);
+  };
 
   useEffect(() => {
-    localStorage.setItem("Notes", JSON.stringify(lists));
-  }, [lists]);
+    setNotes();
+  }, []);
 
   function addNote(note) {
     setLists((prevValue) => {
       return [...prevValue, note];
     });
-    localArray.push(note);
+    postNotes(note.title, note.content);
   }
 
   function deletNote(id) {
